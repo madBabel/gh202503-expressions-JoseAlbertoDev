@@ -59,7 +59,7 @@ jobs:
           ${{ toJSON(github.event.pull_request.labels) }}
           EOF
       - name: 'Bug Check'
-        if: ${{! cancelled() && contains(github.event.pull_request.labels, 'fix')}}
+        if: ${{!cancelled() && contains(github.event.pull_request.labels, 'fix')}}
         run: echo "This PR fixes a bug"
       - name: 'Sleep and Cancel'
         run: |
@@ -74,7 +74,7 @@ jobs:
         if: failure()
         run: echo "A previous step failed"
       - name: 'Print Always'
-        if: !cancelled()
+        if: ${{!cancelled()}}
         run: echo "This step runs unless the workflow is cancelled."
       - name: 'On Cancel'
         if: cancelled()
